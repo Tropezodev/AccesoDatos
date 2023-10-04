@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xml>
+    <Productos>
+        <Producto>
+            <nombre nacionalidad="española">patata</nombre>
+            <precio>3.0</precio>
+            <categoría categoria=""/>
+        </Producto>
+        <Producto>
+            <nombre nacionalidad="española">tomate</nombre>
+            <precio>5.0</precio>
+            <categoría categoria=""/>
+        </Producto>
+        <Producto>
+            <nombre nacionalidad="española">lechuga</nombre>
+            <precio>7.0</precio>
+            <categoría categoria=""/>
+        </Producto>
+        <Producto>
+            <nombre nacionalidad="española">calabaza</nombre>
+            <precio>15.0</precio>
+            <categoría categoria=""/>
+        </Producto>
+    </Productos>
+</xml>

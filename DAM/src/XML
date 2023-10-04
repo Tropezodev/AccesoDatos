@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UFT-8" standalone="no">
+<xml>
+<alumnos>
+    <alumno>
+        <nombre>PacoPepe</nombre>
+        <calificacion>8</calificacion>
+    </alumno>
+    <alumno>
+        <nombre>Pedro</nombre>
+        <calificacion>5</calificacion>
+    </alumno>
+    <alumno>
+        <nombre>Pepe</nombre>
+        <calificacion>7</calificacion>
+    </alumno>
+    <alumno>
+        <nombre>Paco</nombre>
+        <calificacion>1</calificacion>
+    </alumno>
+    <alumno>
+        <nombre>Cepeda</nombre>
+        <calificacion>2</calificacion>
+    </alumno>
+</xml>
+___________________________________________
+
+<?xml version="1.0" encoding="UFT-8" standalone="no">
+<xml>
+<alumnos>
+    <alumno nombre="PacoPepe" nota="8"/>
+<alumnos/>

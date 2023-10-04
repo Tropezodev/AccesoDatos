@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="LOMBOK" />
+        <module name="JavaFXCrud2022Sqlite" />
+        <module name="02Bd" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="02Bd" target="17" />
+      <module name="JavaFXCrud2022Sqlite" target="19" />
+      <module name="LOMBOK" target="19" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
