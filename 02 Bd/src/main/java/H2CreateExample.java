@@ -5,14 +5,14 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 /*
 Ejercicios:
-    *1-Crea un nuevo método para insertar registros en la tabla libros con parámetros id, titulo y autor: insertar(int id, String titulo, String autor)
-    *2-Crea un nuevo método que muestre los libros de un autor que se le pase como parámetro
-    *3-Utiliza el método eliminarTabla para eliminar la tabla de libros y después crearla de nuevo añadiendo un campo String llamado editorial. (En H2 no es imprescindible, pero...)
-    *4-Modifica también el método para insertar libros añadiendo el nuevo campo
-    *5-Utiliza el método anterior para añadir 5 libros en los que se repitan las editoriales y que todos no sean de la misma.
-    *6-Crea un método que muestre un listado en pantalla con los libros de una editorial que se pase como parámetro
-    *7-Crea una nueva clase idéntica a esta llamada MiClaseH2 que tenga una propiedad para "almacenar" la conexión a la BBDD
-    *8-Modifica los métodos de esta nueva clase para que usen dicha conexión y no "conecten" cada vez que se llaman
+    1-Crea un nuevo método para insertar registros en la tabla libros con parámetros id, título y autor: insertar(int id, String titulo, String autor)
+    2-Crea un nuevo método que muestre los libros de un autor que se le pase como parámetro
+    3-Utiliza el método eliminarTabla para eliminar la tabla de libros y después crearla de nuevo añadiendo un campo String llamado editorial. (En H2 no es imprescindible, pero...)
+    4-Modifica también el método para insertar libros añadiendo el nuevo campo
+    5-Utiliza el método anterior para añadir 5 libros en los que se repitan las editoriales y que todos no sean de la misma
+    6-Crea un método que muestre un listado en pantalla con los libros de una editorial que se pase como parámetro
+    7-Crea una nueva clase idéntica a esta llamada MiClaseH2 que tenga una propiedad para "almacenar" la conexión a la BBDD
+    8-Modifica los métodos de esta nueva clase para que usen dicha conexión y no "conecten" cada vez que se llaman
     9-Crea una clase llamada Libro con las propiedades adecuadas según la tabla "libros" creada en la base de datos
     10-Crea un método que devuelva en forma de ArrayList<Libro> todos los libros de un autor
     (Opcional) Crea una tabla llamada editoriales con los campos adecuados y usa el método crearTablaFK para relacionar editoriales y libros
@@ -32,10 +32,13 @@ public class H2CreateExample {
             //createTableExample.insertarRegistroJOP();
         //2
             //createTableExample.leerRegistroAutor();
-        //3
+        //6
             //createTableExample.leerRegistroEditorial();
         //10
-            ArrayList<Libro> libros = createTableExample.leerRegistros("Paco");
+            Libro Libro=new Libro();
+            ArrayList<Libro> libros = Libro.leerRegistros("Paco");
+            //Libro.leerRegistroAutor();
+
     }
 
     public static Connection getConnection() {
@@ -52,7 +55,7 @@ public class H2CreateExample {
         try {
             Connection connection = H2JDBCUtils.getConnection();//llamamos a la conexión de otra clase, daría igual
             Statement statement = connection.createStatement();
-            String textoSQL="CREATE TABLE IF NOT EXISTS libros (id int(4) primary key, titulo varchar(60), autor varchar(40), editorial varchar (60));";
+            String textoSQL="CREATE TABLE IF NOT EXISTS libros (id int(4) primary key, titulo varchar(60), autor varchar(40), idEditorial int (4));";
             statement.execute(textoSQL);
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
@@ -62,7 +65,7 @@ public class H2CreateExample {
         try {
             Connection connection = H2JDBCUtils.getConnection();
             Statement statement = connection.createStatement();
-            String textoSQL="CREATE TABLE IF NOT EXISTS libros (id int(3) primary key, titulo varchar(60), autor varchar(40), idEditorial varchar(40) " +
+            String textoSQL="CREATE TABLE IF NOT EXISTS libros (id int(3) primary key, titulo varchar(60), autor varchar(40), idEditorial int(4) " +
                     "CONSTRAINT FK_Editorial FOREIGN KEY (idEditorial) REFERENCES Editoriales(id));";
             statement.execute(textoSQL);
         } catch (SQLException e) {
@@ -85,13 +88,13 @@ public class H2CreateExample {
         try  {
             Connection connection = H2JDBCUtils.getConnection();
 
-            String textoSQL="insert into libros (id, titulo, autor, editorial) values (?, ?, ?, ?)";
+            String textoSQL="insert into libros (id, titulo, autor, idEditorial) values (?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(textoSQL);
             preparedStatement.setInt(1, 1);
             preparedStatement.setString(2, "Panza de burro");
             preparedStatement.setString(3, "Andrea Abreu");
-            preparedStatement.setString(4, "ANAYA");
+            preparedStatement.setInt(4, 1);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -99,17 +102,17 @@ public class H2CreateExample {
         }
     }
    //1
-    public void insertarRegistro1( int id, String titulo, String autor, String editorial) throws SQLException{
+    public void insertarRegistro1( int id, String titulo, String autor, int idEditorial) throws SQLException{
         try  {
             Connection connection = H2JDBCUtils.getConnection();
 
-            String textoSQL="insert into libros (id, titulo, autor, editorial) values (?, ?, ?, ?)";
+            String textoSQL="insert into libros (id, titulo, autor, idEditorial) values (?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(textoSQL);
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, titulo);
             preparedStatement.setString(3, autor);
-            preparedStatement.setString(4, editorial);
+            preparedStatement.setInt(4, idEditorial);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -120,7 +123,7 @@ public class H2CreateExample {
         int param1 = Integer.parseInt(JOptionPane.showInputDialog("Introduce el ID:"));
         String param2 = JOptionPane.showInputDialog("Introduce el Título");
         String param3 = JOptionPane.showInputDialog("Introduce el Autor");
-        String param4 = JOptionPane.showInputDialog("Introduce la Editorial");
+        int param4 = Integer.parseInt(JOptionPane.showInputDialog("Introduce la idEditorial"));
         try {
             insertarRegistro1(param1,param2,param3,param4);
         } catch (SQLException e) {
@@ -141,8 +144,8 @@ public class H2CreateExample {
             while (rs.next()) {
                 String titulo = rs.getString("titulo");
                 String autor = rs.getString("autor");
-                String editorial = rs.getString("editorial");
-                System.out.println("Libro:" +  id + "," + titulo + "," + autor + ", " + editorial);
+                int idEditorial = rs.getInt("idEditorial");
+                System.out.println("Libro:" +  id + "," + titulo + "," + autor + ", " + idEditorial);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -171,12 +174,12 @@ public class H2CreateExample {
    //6
    public void leerRegistroEditorial() throws SQLException{
        try{
-           String editorialJOP=JOptionPane.showInputDialog("Introduce la EDITORIAL a buscar");
+           int editorialJOP=Integer.parseInt(JOptionPane.showInputDialog("Introduce la IdEditorial a buscar"));
            Connection connection=getConnection();
            String textoSQL="select * from libros where lower(editorial)=lower(?)";
 
            PreparedStatement preparedStatement=connection.prepareStatement(textoSQL);
-           preparedStatement.setString(1, editorialJOP);
+           preparedStatement.setInt(1, editorialJOP);
 
            ResultSet rs = preparedStatement.executeQuery();
 
