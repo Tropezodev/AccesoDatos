@@ -7,10 +7,99 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class HelloController {
 
+    @FXML
+    private Button btnBorrar;
+
+    @FXML
+    private Button btnFichaje;
+
+    @FXML
+    private Button btnIsertar;
+
+    @FXML
+    private Button btnModificar;
+
+    @FXML
+    private ComboBox<Trabajador> cmbDepartamento;
+
+    @FXML
+    private TableColumn<Trabajador, String> colApellidosCRUD;
+
+    @FXML
+    private TableColumn<Trabajador, String> colApellidosTrabajadores;
+
+    @FXML
+    private TableColumn<Trabajador, String> colDNICRUD;
+
+    @FXML
+    private TableColumn<Trabajador, String> colDNITrabajadores;
+
+    @FXML
+    private TableColumn<Trabajador, String> colDepartamentoCRUD;
+
+    @FXML
+    private TableColumn<Trabajador, String> colDepartamentoTrabajadores;
+
+    @FXML
+    private TableColumn<Trabajador, ?/*Date*/> colFEntradaFichaje;
+
+    @FXML
+    private TableColumn<Trabajador, ?/*Date?*/> colFSalidaFichaje;
+
+    @FXML
+    private TableColumn<Trabajador, ?/*Date?*/> colHEntradaFichaje;
+
+    @FXML
+    private TableColumn<Trabajador, ?/*Date?*/> colHSalidaFichaje;
+
+    @FXML
+    private TableColumn<Trabajador, Integer> colIdCRUD;
+
+    @FXML
+    private TableColumn<Trabajador, Integer> colIdFichaje;
+
+    @FXML
+    private TableColumn<Trabajador, Integer> colIdTrabajadores;
+
+    @FXML
+    private TableColumn<Trabajador, String> colNombreCRUD;
+
+    @FXML
+    private TableColumn<Trabajador, String> colNombreFichaje;
+
+    @FXML
+    private TableColumn<Trabajador, String> colNombreTrabajadores;
+
+    @FXML
+    private Label lbReloj;
+
+    @FXML
+    private TableView<Trabajador> tbCRUDTrabajadores;
+
+    @FXML
+    private TableView<Trabajador> tbFichaje;
+
+    @FXML
+    private TableView<Trabajador> tbTrabajadores;
+
+    @FXML
+    private TextField txtApellidos;
+
+    @FXML
+    private TextField txtDNI;
+
+    @FXML
+    private TextField txtId;
+
+    @FXML
+    private TextField txtNombre;
+
+/*
     @FXML
     private Button btnBorrar;
 
@@ -60,7 +149,7 @@ public class HelloController {
     private TextField txtId;
 
     @FXML
-    private TextField txtNombre;
+    private TextField txtNombre;*/
 
     private RepositorioTrabajadores repositorio;
 
