@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="522.0" prefWidth="800.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="com.example.fichaje.HelloController">
+<VBox alignment="CENTER" prefHeight="522.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fichaje.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <TabPane fx:id="tblTrabajadores" prefHeight="500.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE">
+   <TabPane prefHeight="500.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE">
      <tabs>
-       <Tab fx:id="tbCrud" text="CRUD">
+       <Tab fx:id="tbTrabajador" text="CRUD">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="431.0" prefWidth="750.0">
                   <children>
@@ -62,7 +63,34 @@
        </Tab>
        <Tab fx:id="tbFichaje" text="FICHAJE">
          <content>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="800.0" />
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="800.0">
+                  <children>
+                     <TableView fx:id="tbFichae1" prefHeight="200.0" prefWidth="800.0">
+                       <columns>
+                         <TableColumn fx:id="colFichaje1Id" prefWidth="50.0" text="ID" />
+                         <TableColumn fx:id="colFichaje1Nombre" prefWidth="175.0" text="NOMBRE" />
+                           <TableColumn fx:id="colFichaje1Apellidos" prefWidth="175.0" text="APELLIDOS" />
+                           <TableColumn fx:id="colFichaje1DNI" prefWidth="150.0" text="DNI" />
+                           <TableColumn fx:id="colFichaje1Departamento" prefWidth="210.0" text="DEPARTAMENTO" />
+                       </columns>
+                     </TableView>
+                     <Label fx:id="lbReloj" layoutX="100.0" layoutY="218.0" minHeight="30.0" minWidth="300.0" text="RELOJ" textAlignment="CENTER" />
+                     <Button fx:id="btnFichaje" layoutX="526.0" layoutY="218.0" minHeight="30.0" minWidth="125.0" mnemonicParsing="false" style="-fx-border-color: green; -fx-font-family: IMPACT;" text="FICHAJE">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Button>
+                     <TableView fx:id="tbFichaje2" layoutY="268.0" prefHeight="200.0" prefWidth="800.0">
+                       <columns>
+                         <TableColumn fx:id="colFichaje2Id" prefWidth="50.0" text="ID" />
+                         <TableColumn fx:id="colFichaje2Nombre" prefWidth="175.0" text="NOMBRE" />
+                           <TableColumn fx:id="colFichaje2FechaE" prefWidth="133.75" text="FECHA ENTRADA" />
+                           <TableColumn fx:id="colFichaje2HoraE" prefWidth="133.75" text="HORA ENTRADA" />
+                           <TableColumn fx:id="colFichaje2FechaS" prefWidth="133.75" text="FECHA SALIDA" />
+                           <TableColumn fx:id="colFichaje2HoraS" prefWidth="133.75" text="HORA SALIDA" />
+                       </columns>
+                     </TableView>
+                  </children></AnchorPane>
          </content>
        </Tab>
      </tabs>

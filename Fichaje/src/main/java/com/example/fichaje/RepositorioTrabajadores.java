@@ -40,11 +40,17 @@ public class RepositorioTrabajadores {
             stmt = conexion.createStatement();
             //El id se genera automáticamente con el AUTOINCREMENT para evitar líos al crear registros (nunca meter id)
             String CREATE_TABLE_SQL="CREATE TABLE IF NOT EXISTS trabajadores (" +
-                    "    id               INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                    "    id               INT PRIMARY KEY AUTO_INCREMENT,\n" +
                     "    nombre           VARCHAR (50), apellidos VARCHAR(50), dni varchar(15), " +
                     "    departamento VARCHAR(50)" +
                     ");";
             stmt.executeUpdate(CREATE_TABLE_SQL);
+            Trabajador t = new Trabajador();
+            t.setNombre("Paco");
+            t.setApellidos("Mérmela");
+            t.setDni("23232323X");
+            t.setDepartamento("Administración");
+            insert(t);
         }catch (SQLException sqlException){
             sqlException.printStackTrace();
         }

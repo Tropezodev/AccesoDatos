@@ -1,12 +1,12 @@
 package com.example.fichaje;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class HelloController {
@@ -42,13 +42,13 @@ public class HelloController {
     private TableView<Trabajador> tbView;
 
     @FXML
-    private Tab tbCrud;
+    private TabPane tabPane;
 
     @FXML
     private Tab tbFichaje;
 
     @FXML
-    private TabPane tblTrabajadores;
+    private Tab tbTrabajador;
 
     @FXML
     private TextField txtApellidos;
@@ -72,6 +72,57 @@ public class HelloController {
         colNombre.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("nombre"));
         colApellidos.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("apellidos"));
         colDepartamento.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("departamento"));
-    }
 
+        //Carga las opciones de departamentos en el combo
+        ObservableList<String> listaDepartamentos = FXCollections.observableArrayList("Administración","Producción","Limpieza");
+        //cmbDepartamento.setItems(listaDepartamentos);
+        cmbDepartamento.getSelectionModel().selectFirst();
+
+        //tbTrabajador.setItems
+
+
+    }
+    public void refrescaTabla(){
+        RepositorioTrabajadores repositorio = new RepositorioTrabajadores();
+        final ObservableList<Trabajador> trabajadores = repositorio.leerTodosFX();
+        //tbTrabajador.setItems(trabajadores);
+    }
+    public void insertar(){
+        Trabajador t=new Trabajador();
+        //No se pone el ID porque lo genera la DB directamente
+        t.setNombre(txtNombre.getText());
+        t.setApellidos(txtApellidos.getText());
+        t.setDni(txtDNI.getText());
+        //Combo Departamento: alumno.setDepartamento(txtDepartamento.getText());
+
+        RepositorioTrabajadores rt = new RepositorioTrabajadores();
+        rt.insert(t);
+        refrescaTabla();
+    }
+    public void callbackClicTable (javafx.scene.input.MouseEvent mouseEvent){
+
+        /*Trabajador t = (Trabajador) tbTrabajador.getSelectionModel().getSelectedItem();
+        txtId.setText(String.valueOf(t.getId()));
+        txtNombre.setText(t.getNombre());
+        txtApellidos.setText(t.getApellidos());
+        txtDNI.setText(t.getDni());
+        //Combo Departamento*/
+    }
+    public void modificar(){
+        Trabajador t= new Trabajador();
+        t.setId(Integer.parseInt(txtId.getText()));
+        t.setNombre(txtNombre.getText());
+        t.setApellidos(txtApellidos.getText());
+        t.setDni(txtDNI.getText());
+        //Combo Departamento: t.setFechaNacimiento(LocalDate.parse(txtFechaNacimiento.getText()));
+
+        RepositorioTrabajadores r= new RepositorioTrabajadores();
+        r.update(t);
+        refrescaTabla();
+    }
+    public void borrar(){
+        RepositorioTrabajadores r=new RepositorioTrabajadores();
+        r.delete(Integer.parseInt(txtId.getText()));
+        refrescaTabla();
+    }
 }
