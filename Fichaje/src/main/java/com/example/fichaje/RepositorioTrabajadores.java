@@ -2,6 +2,7 @@ package com.example.fichaje;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Data;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 //Realiza el método Detele (borrar registro para alumno y otro para int id)
 
 //CRUD=Create/Read/Update/Delete
+@Data
 public class RepositorioTrabajadores {
     //Sería interesante hacer una clase para las conexiones
     Connection conexion;
@@ -89,7 +91,7 @@ public class RepositorioTrabajadores {
         }
         return lista;
     }
-    public void inserta(Trabajador a){
+    public void insert(Trabajador a){
         PreparedStatement sentencia = null;
         String sentenciaSql = "INSERT INTO trabajadores (nombre, apellidos, dni, departamento) VALUES (?, ?, ?, ?)";
         try {
@@ -97,7 +99,7 @@ public class RepositorioTrabajadores {
             sentencia.setString(1, a.getNombre());
             sentencia.setString(2, a.getApellidos());
             sentencia.setString(3, a.getDni());
-            sentencia.setString(4, a.getDepartamento();
+            sentencia.setString(4, a.getDepartamento());
             sentencia.executeUpdate();
 
             ResultSet rs = sentencia.getGeneratedKeys();
@@ -117,7 +119,7 @@ public class RepositorioTrabajadores {
             sentencia.setString(1,trabajador.getNombre());
             sentencia.setString(2,trabajador.getApellidos());
             sentencia.setString(3,trabajador.getDni());
-            sentencia.setString(4,trabajador.getDepartamento();
+            sentencia.setString(4,trabajador.getDepartamento());
             sentencia.setInt(5,trabajador.getId());
             sentencia.executeUpdate();
         } catch (SQLException e) {
