@@ -14,6 +14,7 @@ public class Venta {
     private float precioAdultos = 5.00F;
     private float precioMenores = 2.80F;
 
+
     public int getId() {
         return id;
     }

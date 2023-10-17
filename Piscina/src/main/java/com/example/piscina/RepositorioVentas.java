@@ -19,14 +19,13 @@ public class RepositorioVentas {
     public void setConexion() {
         try {
             // db parameters
-            //jdbc:sqlite:sqlite/alumnos.db significa jdbc:SGBD:Carpeta/archivo donde se guarda la db
-            Class.forName("com.mysql.cj.jdbc.Driver");// create a connection to the database
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ventasdb?createDatabaseIfNotExist=true", "root", "");
+//            Class.forName("com.mysql.cj.jdbc.Driver");// create a connection to the database
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ventas?createDatabaseIfNotExist=true", "root", "");
             System.out.println("Connection to mysql has been established.");
             createTable();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -37,9 +36,10 @@ public class RepositorioVentas {
             stmt = conexion.createStatement();
             //El id se genera automáticamente con el AUTOINCREMENT para evitar líos al crear registros (nunca meter id)
             String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS ventas (" +
-                    "    id               INTEGER PRIMARY KEY AUTO_INCREMENT,\n" +
-                    "    adultos           INTEGER, precio_adultos FLOAT" +
-                    "    menores           INTEGER, precio_menores FLOAT" +
+                    "    id                INTEGER PRIMARY KEY AUTO_INCREMENT,\n" +
+                    "    nombre            VARCHAR(25)," +
+                    "    adultos           INTEGER, precio_adultos FLOAT," +
+                    "    menores           INTEGER, precio_menores FLOAT," +
                     "    fecha DATE, hora TIME" +
                     ");";
 
@@ -66,6 +66,7 @@ public class RepositorioVentas {
                 aux.setFecha(rs.getDate("fecha").toLocalDate());
                 aux.setHora(rs.getTime("hora").toLocalTime());
                 lista.add(aux);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -86,12 +87,12 @@ public class RepositorioVentas {
             sentencia.setDate(6, Date.valueOf(v.getFecha()));
             sentencia.setTime(7, Time.valueOf(v.getHora()));
 
-            sentencia.executeUpdate( );
+            sentencia.executeUpdate();
 
-            //Como el id es autoincremental, el .getGeneratedKeys te devuelve al objeto
-            //Pero al crear la tabla se tiene que indicar algo, se verá más adelante
-            ResultSet rs = sentencia.getGeneratedKeys();
-            v.setId(rs.getInt(1));
+//            Como el id es autoincremental, el .getGeneratedKeys te devuelve al objeto
+//            Pero al crear la tabla se tiene que indicar algo, se verá más adelante
+//            ResultSet rs = sentencia.getGeneratedKeys();
+//            v.setId(rs.getInt(1));
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();

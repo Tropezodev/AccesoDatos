@@ -40,19 +40,19 @@
                <VBox prefHeight="200.0" prefWidth="100.0">
                   <children>
                      <Label fx:id="lbAdultos" text="ADULTOS" />
-                     <TextField fx:id="txtAdultos" maxWidth="100.0" minWidth="100.0" />
+                     <TextField fx:id="txtAdultos" maxWidth="100.0" minWidth="100.0" onKeyReleased="#total" />
                   </children>
                </VBox>
                <VBox prefHeight="200.0" prefWidth="100.0">
                   <children>
                      <Label fx:id="lbMenores" text="MENORES" />
-                     <TextField fx:id="txtMenores" maxWidth="100.0" minWidth="100.0" />
+                     <TextField fx:id="txtMenores" maxWidth="100.0" minWidth="100.0" onKeyReleased="#total" />
                   </children>
                </VBox>
                <VBox prefHeight="200.0" prefWidth="100.0">
                   <children>
                      <Label />
-                     <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertar" text="INSERTAR" />
+                     <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#vender" text="INSERTAR" />
                   </children>
                </VBox>
             </children>
@@ -81,7 +81,7 @@
                <Font size="36.0" />
             </font>
          </Label>
-         <TextField fx:id="txtTotal" alignment="CENTER" maxWidth="200.0" minHeight="50.0" minWidth="200.0" promptText="TOTAL">
+         <TextField fx:id="txtTotal" alignment="CENTER" editable="false" maxWidth="200.0" minHeight="50.0" minWidth="200.0" promptText="TOTAL">
             <font>
                <Font size="36.0" />
             </font>
