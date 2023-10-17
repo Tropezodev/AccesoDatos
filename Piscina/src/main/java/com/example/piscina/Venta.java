@@ -4,12 +4,44 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Venta {
+
+    private int id;
+    private String nombre;
+    private LocalDate fecha;
+    private LocalTime hora;
+    private int adultos;
+    private int menores;
+    private float precioAdultos = 5.00F;
+    private float precioMenores = 2.80F;
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public LocalDate getFecha() {
+        return fecha;
+    }
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
     }
 
     public int getAdultos() {
@@ -28,25 +60,19 @@ public class Venta {
         this.menores = menores;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
+    public float getPrecioAdultos() {
+        return precioAdultos;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setPrecioAdultos(float precioAdultos) {
+        this.precioAdultos = precioAdultos;
     }
 
-    public LocalTime getHora() {
-        return hora;
+    public float getPrecioMenores() {
+        return precioMenores;
     }
 
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
+    public void setPrecioMenores(float precioMenores) {
+        this.precioMenores = precioMenores;
     }
-
-    private int id;
-    private int adultos;
-    private int menores;
-    private LocalDate fecha;
-    private LocalTime hora;
 }

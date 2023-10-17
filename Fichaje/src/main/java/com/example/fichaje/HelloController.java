@@ -99,57 +99,6 @@ public class HelloController {
     @FXML
     private TextField txtNombre;
 
-/*
-    @FXML
-    private Button btnBorrar;
-
-    @FXML
-    private Button btnIsertar;
-
-    @FXML
-    private Button btnModificar;
-
-    @FXML
-    private ComboBox<Trabajador> cmbDepartamento;
-
-    @FXML
-    private TableColumn<Trabajador, String> colApellidos;
-
-    @FXML
-    private TableColumn<Trabajador, String> colDNI;
-
-    @FXML
-    private TableColumn<Trabajador, String> colDepartamento;
-
-    @FXML
-    private TableColumn<Trabajador, Integer> colId;
-
-    @FXML
-    private TableColumn<Trabajador, String> colNombre;
-
-    @FXML
-    private TableView<Trabajador> tbView;
-
-    @FXML
-    private TabPane tabPane;
-
-    @FXML
-    private Tab tbFichaje;
-
-    @FXML
-    private Tab tbTrabajador;
-
-    @FXML
-    private TextField txtApellidos;
-
-    @FXML
-    private TextField txtDNI;
-
-    @FXML
-    private TextField txtId;
-
-    @FXML
-    private TextField txtNombre;*/
 
     private RepositorioTrabajadores repositorio;
 
@@ -157,18 +106,16 @@ public class HelloController {
         repositorio=new RepositorioTrabajadores();
 
         final ObservableList<Trabajador> trabajadores=repositorio.leerTodosFX();
-        colId.setCellValueFactory(new PropertyValueFactory<Trabajador, Integer>("id"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("nombre"));
-        colApellidos.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("apellidos"));
-        colDepartamento.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("departamento"));
+        colIdCRUD.setCellValueFactory(new PropertyValueFactory<Trabajador, Integer>("id"));
+        colNombreCRUD.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("nombre"));
+        colApellidosCRUD.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("apellidos"));
+        colDepartamentoCRUD.setCellValueFactory(new PropertyValueFactory<Trabajador, String>("departamento"));
 
         //Carga las opciones de departamentos en el combo
         ObservableList<String> listaDepartamentos = FXCollections.observableArrayList("Administración","Producción","Limpieza");
         //cmbDepartamento.setItems(listaDepartamentos);
         cmbDepartamento.getSelectionModel().selectFirst();
-
-        //tbTrabajador.setItems
-
+        //tbCRUDTrabajadores.setItems
 
     }
     public void refrescaTabla(){
@@ -182,15 +129,14 @@ public class HelloController {
         t.setNombre(txtNombre.getText());
         t.setApellidos(txtApellidos.getText());
         t.setDni(txtDNI.getText());
-        //Combo Departamento: alumno.setDepartamento(txtDepartamento.getText());
+        //t.setDepartamento();
 
         RepositorioTrabajadores rt = new RepositorioTrabajadores();
         rt.insert(t);
         refrescaTabla();
     }
     public void callbackClicTable (javafx.scene.input.MouseEvent mouseEvent){
-
-        /*Trabajador t = (Trabajador) tbTrabajador.getSelectionModel().getSelectedItem();
+        Trabajador t = (Trabajador) tbCRUDTrabajadores.getSelectionModel().getSelectedItem();
         txtId.setText(String.valueOf(t.getId()));
         txtNombre.setText(t.getNombre());
         txtApellidos.setText(t.getApellidos());
