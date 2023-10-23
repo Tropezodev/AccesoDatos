@@ -62,7 +62,7 @@ public class RepositorioVentas {
                 aux.setAdultos(rs.getInt("adultos"));
                 aux.setPrecioAdultos(rs.getFloat("precio_adultos"));
                 aux.setMenores(rs.getInt("menores"));
-                aux.setPrecioAdultos(rs.getFloat("precio_menores"));
+                aux.setPrecioMenores(rs.getFloat("precio_menores"));
                 aux.setFecha(rs.getDate("fecha").toLocalDate());
                 aux.setHora(rs.getTime("hora").toLocalTime());
                 lista.add(aux);

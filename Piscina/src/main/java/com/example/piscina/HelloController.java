@@ -12,12 +12,16 @@ import java.net.URL;
 import java.nio.file.attribute.FileTime;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+import static java.lang.Thread.sleep;
 
+
+public class HelloController implements Initializable {
 
     @FXML
     private Button btnInsertar;
@@ -81,15 +85,16 @@ public class HelloController implements Initializable {
 
     }
 
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm:ss");
     private RepositorioVentas repositorio;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Venta v=new Venta();
+//        Thread hilo = new Thread(fechaHora);
+//        hilo.start();
 
-
-
+        Venta v = new Venta();
         repositorio = new RepositorioVentas();
 
         final ObservableList<Venta> ventas = repositorio.leerTodos();
@@ -137,7 +142,22 @@ public class HelloController implements Initializable {
         if (txtMenores.getText().equals("")){
             txtMenores.setText("0");
         }
-        total= (Float.parseFloat(txtAdultos.getText())*v.getPrecioAdultos()) + ((Float.parseFloat(txtMenores.getText()))*v.getPrecioAdultos());
+        total= (Float.parseFloat(txtAdultos.getText())*v.getPrecioAdultos()) + ((Float.parseFloat(txtMenores.getText()))*v.getPrecioMenores());
         txtTotal.setText(String.valueOf(total));
     }
+//    Runnable fechaHora = new Runnable() {
+//        @Override
+//        public void run() {
+//
+//            while (true){
+//                try {
+//                    Thread.sleep(500);
+//                    lbFechaHora.setText(formato.format(LocalDateTime.now()));
+//                    System.out.println(lbFechaHora.getText());
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
+//    };
 }
