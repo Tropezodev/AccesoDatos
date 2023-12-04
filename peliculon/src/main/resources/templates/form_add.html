@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<div th:insert="components/fragments :: nav_bar"></div>
+<!-- Esta plantilla va a servir para añadir como modificar registros -->
+<!-- Las URL/endpoint serán un PostMapping en nuestro controlador -->
+<!-- El ternario es para que cuando la película tenga "id" se modifique y si no tiene, se añada -->
+<!-- enctype="multipart/form-data es para que se puedan subir ficheros -->
+<!-- En th:object pongo el objeto que envío desde el controlador -->
+
+<form th:action="${formPelicula.id !=0} ? @{/crud/modificar} : @{/crud/save}"
+      method="post" enctype="multipart/form-data" th:object="${formPelicula}">
+    <div class="container">
+        <div class="row">
+            <input type="hidden" class="form-control" th:field="*{id}">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <!-- En el input el name es fundamentar para vincularlo a la db -->
+                    <input type="text" class="form-control" name="titulo" id="titulo" th:field="*{titulo}" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="sinopsis">Sinopsis</label>
+                    <textarea class="form-control" name="sinopsis" id="sinopsis" rows="3" th:field="*{sinopsis}"
+                              required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"><label for="fecha">Fecha</label> <input type="date" class="form-control"
+                                                                                name="fecha" id="fecha"
+                                                                                th:field="*{fecha}" th:format="'dd-MM-YYYY'" required></div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"><label for="imagen">Imagen</label> <input type="text" class="form-control"
+                                                                                  name="imagen" id="imagen"
+                                                                                  th:field="*{imagen}"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"><label for="trailer">Trailer</label> <input type="url" class="form-control"
+                                                                                    name="trailer" id="trailer"
+                                                                                    th:field="*{trailer}"
+                                                                                    required></div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"><label for="nacionalidad">Nacionalidad</label> <select class="form-control"
+                                                                                               name="nacionalidad"
+                                                                                               id="nacionalidad"
+                                                                                               th:field="*{nacionalidad}"
+                                                                                               required>
+                    <option value="">Seleccione una nacionalidad</option>
+                    <option value="España">España</option>
+                    <option value="EE. UU.">Estados Unidos</option>
+                    <option value="Reino Unido">Reino Unido</option>
+                    <option value="Francia">Francia</option>
+                    <option value="Italia">Italia</option>
+                    <option value="Japón">Japón</option>
+                </select></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+            <div class="col-md-2">
+                <a href="/crud" class="btn btn-primary">Volver al listado</a>
+            </div>
+        </div>
+    </div>
+</form>
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>

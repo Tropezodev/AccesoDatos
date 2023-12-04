@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<div th:insert="components/fragments :: nav_bar"></div>
+<div class="container">
+    <h1 th:text="${pelicula.titulo}"></h1>
+    <p th:text="${pelicula.sinopsis}"></p>
+    <p th:text="${pelicula.fecha}"></p>
+    <p th:text="${pelicula.nacionalidad}"></p>
+    <img style="width:300px" th:src="'/img/' + ${pelicula.imagen}"><br><br>
+    <iframe width="560" height="315" th:src="${pelicula.trailer}" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+
+    <h2>Comentarios</h2>
+    <div th:each="comentario:${comentarios}">
+        <h3 th:text="${comentario.titulo}"></h3>
+        <p th:text="${comentario.contenido}"></p>
+        <p th:text="${comentario.fecha}"></p>
+    </div>
+    <form action="/comentario/add" th:object="${nuevoComentario}" method="post">
+        <input type="hidden" name="idPelicula" th:value="${pelicula.id}">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" name="titulo" id="titulo" th:field="*{titulo}" value="Munich">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="contenido"></label>
+                <textarea class="form.control" name="contenido" id="contenido" rows="3" th:field="*{contenido}"
+                          required></textarea>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Enviar">
+    </form>
+</div>
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>
