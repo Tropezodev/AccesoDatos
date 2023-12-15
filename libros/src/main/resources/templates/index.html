@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<h1 style="text-align:center">Librería de Cristian</h1>
+<div th:insert="components/fragments :: nav_bar"></div>
+<div class="container">
+    <div class="row">
+        <div class="card" th:each="libro:${libreria}" style="width: 18rem;">
+            <img th:src="'/img/' + ${libro.rutaImagen}" class="card-img-top" style="height:280px;" th:alt="'Cartel de: ' + ${libro.titulo}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${libro.titulo}"></h5>
+                <p class="card-text"
+                   th:text="${libro.sinopsis.length >40 ? libro.sinopsis.substring(0,39) + ' ...' : libro.sinopsis}"></p>
+                <a th:href="'/libro/' + ${libro.id}" class="btn btn-primary">+Info</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>

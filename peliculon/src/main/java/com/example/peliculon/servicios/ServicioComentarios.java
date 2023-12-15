@@ -35,4 +35,7 @@ public class ServicioComentarios {
     public void deleteById(long id) {
         repo.deleteById(id);
     }
+    public ArrayList<Comentario> find3(){
+        return repo.find3();
+    }
 }

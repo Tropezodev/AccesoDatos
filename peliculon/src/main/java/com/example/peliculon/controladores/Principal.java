@@ -26,6 +26,7 @@ public class Principal {
     public String inicio(Model model) {
         ArrayList<Pelicula> cartelera = servicioPeliculas.findAll();
         model.addAttribute("cartelera", cartelera);
+        model.addAttribute("ultimosComentarios",servicioComentarios.find3());
         return "index";
     }
 

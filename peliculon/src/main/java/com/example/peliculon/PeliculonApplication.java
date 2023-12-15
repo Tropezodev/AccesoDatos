@@ -4,17 +4,21 @@ import com.example.peliculon.modelo.Comentario;
 import com.example.peliculon.modelo.Pelicula;
 import com.example.peliculon.repositorios.RepositorioComentarios;
 import com.example.peliculon.repositorios.RepositorioPeliculas;
+import com.example.peliculon.storage.StorageProperties;
+import com.example.peliculon.storage.StorageService;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.util.Locale;
 
 @SpringBootApplication
+@EnableConfigurationProperties(StorageProperties.class)
 public class PeliculonApplication {
 	@Autowired
 	RepositorioPeliculas repositorioPeliculas;
@@ -23,8 +27,18 @@ public class PeliculonApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PeliculonApplication.class, args);
 	}
-	
 
+
+	//Para que funcione el StorageService
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			//storageService.deleteAll();
+			storageService.init();
+		};
+	}
+
+	/*
 	@Bean
 	CommandLineRunner ponPeliculas() {
 		return args -> {
@@ -51,5 +65,5 @@ public class PeliculonApplication {
 				}
 			}
 		};
-	}
+	}*/
 }

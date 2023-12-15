@@ -12,17 +12,25 @@
     <p th:text="${pelicula.sinopsis}"></p>
     <p th:text="${pelicula.fecha}"></p>
     <p th:text="${pelicula.nacionalidad}"></p>
-    <img style="width:300px" th:src="'/img/' + ${pelicula.imagen}"><br><br>
-    <iframe width="560" height="315" th:src="${pelicula.trailer}" title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-
+    <div class="row">
+        <div class="col-md-4">
+            <img style="width:320px" th:src="${pelicula.imagen}">
+        </div>
+        <div class="col-md-8">
+            <th:block th:utext="${pelicula.trailer}"></th:block>
+        </div>
+    </div>
     <h2>Comentarios</h2>
     <div th:each="comentario:${comentarios}">
         <h3 th:text="${comentario.titulo}"></h3>
         <p th:text="${comentario.contenido}"></p>
         <p th:text="${comentario.fecha}"></p>
     </div>
+
+<!--    <div class="container">-->
+<!--        <div th:each=""-->
+<!--    </div>-->
+
     <form action="/comentario/add" th:object="${nuevoComentario}" method="post">
         <input type="hidden" name="idPelicula" th:value="${pelicula.id}">
         <div class="col-md-6">

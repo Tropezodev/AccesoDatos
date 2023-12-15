@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<h1 style="text-align:center">Librería de Cristian</h1>
+<div th:insert="components/fragments :: nav_bar"></div>
+<div class="container">
+    <!-- La URL de href debe de aparecer en el controlador para mostrar el formulario que añade registros -->
+    <table class="table stripped">
+        <tr>
+            <th>ID</th>
+            <th>TÍTULO</th>
+            <th>AUTOR</th>
+            <th>SINOPSIS</th>
+            <th>PRECIO</th>
+            <th>FECHA</th>
+            <th>MODIFICAR</th>
+            <th>ELIMINAR</th>
+        </tr>
+        <!-- El nombre de libros es el que viene del controlador "Crud" -->
+        <tr th:each="libro:${listaLibros}">
+            <td th:text="${libro.id}"></td>
+            <td th:text="${libro.titulo}"></td>
+            <td th:text="${libro.autor}"></td>
+            <td th:text="${libro.sinopsis.length >30 ? libro.sinopsis.substring(0,29) : libro.sinopsis}"></td>
+            <td th:text="${libro.precio}"></td>
+            <td th:text="${libro.fechaPublicacion}"></td>
+            <td>
+                <!-- La URL de th:href es el GetMapping que he puesto en el controlador -->
+                <a th:href="'/crud/libros/update/' + ${libro.id}" class="btn btn-primary">Modificar</a>
+            </td>
+            <td>
+                <!-- La URL de th:href es un GetMapping que he puesto en el controlador -->
+                <a th:href="'/crud/libros/delete/' + ${libro.id}" class="btn btn-danger" onclick="return confirm('Are you sure about that?')">Eliminar</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>

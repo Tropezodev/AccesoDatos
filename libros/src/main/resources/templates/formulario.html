@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir Libro</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<h1 style="text-align:center">Librería de Cristian</h1>
+<div th:insert="components/fragments :: nav_bar"></div>
+<form th:action="${formLibro.id !=0} ? @{/crud/libros/postUpdate} : @{/crud/libros/postAdd}"
+      method="post" enctype="multipart/form-data" th:object="${formLibro}">
+    <div class="container">
+        <div class="row">
+            <input type="hidden" class="form-control" th:field="*{id}">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <!-- En el input el name es fundamental para vincularlo a la db -->
+                    <input type="text" class="form-control" name="titulo" id="titulo" th:field="*{titulo}" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="autor">Autor</label>
+                    <!-- En el input el name es fundamental para vincularlo a la db -->
+                    <input type="text" class="form-control" name="autor" id="autor" th:field="*{autor}" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="sinopsis">Sinopsis</label>
+                    <textarea class="form-control" name="sinopsis" id="sinopsis" rows="3" th:field="*{sinopsis}"
+                              required></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <!-- En el input el name es fundamental para vincularlo a la db -->
+                    <input type="text" class="form-control" name="precio" id="precio" th:field="*{precio}" required>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"><label for="fecha">Fecha</label> <input type="date" class="form-control"
+                                                                                name="fecha" id="fecha"
+                                                                                th:field="*{fechaPublicacion}" th:format="'dd-MM-YYYY'" required></div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group"><label for="imagen">Imagen</label> <input type="text" class="form-control"
+                                                                                  name="imagen" id="imagen"
+                                                                                  th:field="*{rutaImagen}"></div>
+            </div>
+            <div class="col-md-3" th:if="${formLibro.rutaImagen}">
+                <img th:src="'/img/' + ${formLibro.rutaImagen}" width="67">
+            </div>
+        </div>
+        </div><br><br>
+        <div class="row">
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+<!--            <div class="col-md-2">-->
+<!--                <a href="/crud/libros" class="btn btn-primary">Volver al listado</a>-->
+<!--            </div>-->
+        </div>
+    </div>
+</form>
+
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>

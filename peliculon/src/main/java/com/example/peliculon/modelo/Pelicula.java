@@ -22,6 +22,7 @@ public class Pelicula {
     private LocalDate fecha; // Si es para una api/web internacional se usa ZonedDateTime
     private String nacionalidad;
     private String imagen;
+    @Column(columnDefinition = "TEXT")
     private String trailer;
     /*@OneToMany
     private ArrayList<Comentario> comentarios;*/

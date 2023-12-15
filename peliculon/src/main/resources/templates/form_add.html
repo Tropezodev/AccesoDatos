@@ -40,14 +40,17 @@
                                                                                 th:field="*{fecha}" th:format="'dd-MM-YYYY'" required></div>
             </div>
             <div class="col-md-6">
-                <div class="form-group"><label for="imagen">Imagen</label> <input type="text" class="form-control"
-                                                                                  name="imagen" id="imagen"
-                                                                                  th:field="*{imagen}"></div>
+                <div class="form-group"><label for="imagen">Imagen</label> <input type="file" class="form-control"
+                                                                                  name="file" id="imagen"
+                                                                                  accept="image/*"></div>
+                <div th:if="${formPelicula.imagen}">
+                    <img th:src="'/files/' + ${formPelicula.imagen}" class="img-thumbnail">
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group"><label for="trailer">Trailer</label> <input type="url" class="form-control"
+                <div class="form-group"><label for="trailer">Trailer</label> <input type="text" class="form-control"
                                                                                     name="trailer" id="trailer"
                                                                                     th:field="*{trailer}"
                                                                                     required></div>

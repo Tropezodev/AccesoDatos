@@ -7,14 +7,29 @@
 </head>
 <body>
 <div th:insert="components/fragments :: nav_bar"></div>
-<h1>El Peliculón by Zeerom</h1>
-<div th:each="pelicula:${cartelera}">
-    <h2>
-        <a th:href="'/pelicula/' + ${pelicula.id}" th:text="${pelicula.titulo}"></a>
-    </h2>
-    <br>
-    <a th:href="'/pelicula/' + ${pelicula.id}"><img style="width:300px" th:src="'/img/' + ${pelicula.imagen}"></a>
+<h1 class="animate__animated animate__wobble" style="text-align:center">El Peliculón by Zeerom</h1>
+
+<!--<div th:each="pelicula:${cartelera}">-->
+<!--    <h2>-->
+<!--        <a th:href="'/pelicula/' + ${pelicula.id}" th:text="${pelicula.titulo}"></a>-->
+<!--    </h2>-->
+<!--    <br>-->
+<!--    <a th:href="'/pelicula/' + ${pelicula.id}"><img style="width:300px" th:src="${pelicula.imagen}"></a>-->
+<!--</div>-->
+<div class="container">
+    <div class="row">
+        <div class="card" th:each="pelicula:${cartelera}" style="width: 18rem;">
+            <img th:src="${pelicula.imagen}" class="card-img-top" style="height:320px;" th:alt="'Cartel de: ' + ${pelicula.titulo}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${pelicula.titulo}"></h5>
+                <p class="card-text"
+                   th:text="${pelicula.sinopsis.length >40 ? pelicula.sinopsis.substring(0,39) + ' ...' : pelicula.sinopsis}"></p>
+                <a th:href="'/pelicula/' + ${pelicula.id}" class="btn btn-primary">+Info</a>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div th:insert="components/fragments :: footer"></div>
 </body>
 </html>

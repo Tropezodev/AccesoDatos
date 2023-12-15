@@ -25,6 +25,7 @@ public class ServicioPeliculas {
         return repo.findByNacionalidad(nacionalidad);
     }
     public void delete(Pelicula pelicula){
+        repo.delete(pelicula);
     }
     public void deleteById(long id){
         repo.deleteById(id);
